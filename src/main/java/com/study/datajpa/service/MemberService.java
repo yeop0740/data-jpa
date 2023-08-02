@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -19,6 +21,10 @@ public class MemberService {
         Member member = new Member(username, age);
         memberJpaRepository.save(member);
         return member.getId();
+    }
+
+    public Optional<Member> findById(Long memberId) {
+        return memberJpaRepository.findById(memberId);
     }
 
 }
