@@ -22,4 +22,8 @@ public class MemberJpaRepository {
         return Optional.ofNullable(em.find(Member.class, memberId));
     }
 
+    public void delete(Member member) {
+        em.remove(member);
+    }
+
 }

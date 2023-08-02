@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.module.ResolutionException;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,13 @@ public class MemberService {
 
     public Optional<Member> findById(Long memberId) {
         return memberJpaRepository.findById(memberId);
+    }
+
+    @Transactional
+    public void delete(Long memberId) {
+        Member member = memberJpaRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 멤버"));
+        memberJpaRepository.delete(member);
     }
 
 }

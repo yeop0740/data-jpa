@@ -29,6 +29,12 @@ public class MemberApiController {
         return new FindMemberResponse(member);
     }
 
+    @DeleteMapping("/api/v1/member/{memberId}")
+    public DeleteMemberResponse delete(@PathVariable Long memberId) {
+        memberService.delete(memberId);
+        return new DeleteMemberResponse(memberId);
+    }
+
     @Data
     @AllArgsConstructor
     private static class SaveMemberResponse {
@@ -67,4 +73,11 @@ public class MemberApiController {
 
     }
 
+    @Data
+    @AllArgsConstructor
+    private static class DeleteMemberResponse {
+
+        private Long memberId;
+
+    }
 }
