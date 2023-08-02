@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,6 +28,11 @@ public class MemberApiController {
         Member member = memberService.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("해당하는 멤버는 존재하지 않습니다."));
         return new FindMemberResponse(member);
+    }
+
+    @GetMapping("api/v1/members")
+    public MembersResponse<List<MemberService.MemberDto>> findMembers() {
+        return new MembersResponse<>(memberService.findAll());
     }
 
     @DeleteMapping("/api/v1/member/{memberId}")
@@ -78,6 +84,14 @@ public class MemberApiController {
     private static class DeleteMemberResponse {
 
         private Long memberId;
+
+    }
+
+    @Data
+    @AllArgsConstructor
+    private static class MembersResponse<T> {
+
+        T data;
 
     }
 }
