@@ -41,6 +41,10 @@ public class Member {
         this.username = username;
     }
 
+    public void changeAge(int age) {
+        this.age = age;
+    }
+
     public void changeTeam(Team team) {
         if (this.team != null) {
             team.getMembers().remove(this);

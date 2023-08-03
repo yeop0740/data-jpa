@@ -38,6 +38,10 @@ public class MemberService {
                 .toList();
     }
 
+    public long count() {
+        return memberJpaRepository.count();
+    }
+
     @Transactional
     public void delete(Long memberId) {
         Member member = memberJpaRepository.findById(memberId)

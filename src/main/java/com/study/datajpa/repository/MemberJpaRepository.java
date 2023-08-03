@@ -28,6 +28,11 @@ public class MemberJpaRepository {
                 .getResultList();
     }
 
+    public long count() {
+        return em.createQuery("select count(m) from Member m", Long.class)
+                .getSingleResult();
+    }
+
     public void delete(Member member) {
         em.remove(member);
     }
